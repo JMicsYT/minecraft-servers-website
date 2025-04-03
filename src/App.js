@@ -1,36 +1,31 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage'; // Правильный default import
-import ServersPage from './pages/ServersPage';
-import NewsPage from './pages/NewsPage';
-import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
-import DashboardPage from './pages/DashboardPage';
-import HelpPage from './pages/HelpPage';
-import Navbar from './components/Navbar'; // Импортируем Navbar
-import styled from 'styled-components';
-
-const PageContainer = styled.div`
-  padding: 20px;
-`;
+import React, { useState } from 'react';
+import AuthModal from './components/AuthModal';
+import News from './components/News';
+import Profile from './components/Profile';
+import AdminPanel from './components/AdminPanel';
+import Servers from './components/Servers';
+import styles from './App.module.css';
+import { Route, Routes } from 'react-router-dom';
 
 function App() {
-  return (
-    <div>
-      <Navbar /> {/* Добавляем Navbar перед Routes */}
-      <PageContainer>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/servers" element={<ServersPage />} />
-          <Route path="/news" element={<NewsPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/help" element={<HelpPage />} />
-        </Routes>
-      </PageContainer>
-    </div>
-  );
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    return (
+        <div className={styles.app}>
+            <Routes>
+                <Route exact path="/" element={
+                    <>
+                        <button onClick={() => setIsModalOpen(true)} className={styles.openModalButton}>Открыть окно авторизации</button>
+                        <AuthModal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)} />
+                        <News />
+                        <Profile />
+                        <Servers />
+                    </>
+                } />
+                <Route path="/admin" element={<AdminPanel />} />
+            </Routes>
+        </div>
+    );
 }
 
 export default App;
