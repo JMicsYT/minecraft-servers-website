@@ -1,9 +1,18 @@
-const API_URL = '/api/news';
+// src/services/newsService.js
 
+const API_BASE_URL = 'http://localhost:5000/api/news'; // Базовый URL для эндпоинтов новостей
+
+// Получение списка новостей
 export const getNews = async () => {
-    const response = await fetch(API_URL);
-    if (!response.ok) {
-        throw new Error('Ошибка при загрузке новостей');
+    try {
+        const response = await fetch(API_BASE_URL);
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Не удалось загрузить новости.');
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Ошибка при получении новостей:', error);
+        throw error;
     }
-    return response.json();
 };

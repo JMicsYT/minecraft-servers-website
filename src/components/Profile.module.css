@@ -1,43 +1,96 @@
 .profileContainer {
     padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 20px;
 }
 
-.input {
-    width: 100%;
-    padding: 10px;
+.loading, .error {
+    text-align: center;
+    padding: 20px;
+    color: #777;
+}
+
+.error {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.userInfo p {
     margin-bottom: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    color: #333;
 }
 
-.updateButton, .editButton, .cancelButton {
+.editButton, .adminLink {
     background-color: #007bff;
     color: white;
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 1em;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
     margin-right: 10px;
 }
 
-.cancelButton {
-    background-color: #ccc;
-    color: black;
+.adminLink {
+    background-color: #28a745;
 }
 
-.adminLink {
-    display: block;
+.editForm {
     margin-top: 20px;
-    background-color: #007bff;
-    color: white;
+}
+
+.inputGroup {
+    margin-bottom: 15px;
+}
+
+.inputGroup label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.95em;
+    color: #333;
+}
+
+.input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    width: calc(100% - 22px);
+}
+
+.buttons button {
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    text-decoration: none;
-    text-align: center;
+    font-size: 1em;
+    margin-right: 10px;
+}
+
+.saveButton {
+    background-color: #28a745;
+    color: white;
+}
+
+.cancelButton {
+    background-color: #dc3545;
+    color: white;
+}
+
+.successMessage {
+    color: #28a745;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.errorMessage {
+    color: #dc3545;
+    margin-bottom: 10px;
+    font-weight: bold;
 }

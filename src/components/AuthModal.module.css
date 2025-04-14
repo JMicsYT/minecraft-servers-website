@@ -1,25 +1,32 @@
 .modal {
+    position: absolute;
     top: 50%;
     left: 50%;
-    right: auto;
-    bottom: auto;
-    margin-right: -50%;
     transform: translate(-50%, -50%);
+    background-color: white;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     width: 300px;
     max-width: 90%;
 }
 
 .overlay {
-    background-color: rgba(0, 0, 0, 0.6);
-    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .title {
     text-align: center;
     margin-bottom: 20px;
+    color: #333;
 }
 
 .toggleButton {
@@ -28,15 +35,34 @@
     padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    width: 100%;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputGroup {
+    margin-bottom: 10px;
+}
+
+.inputGroup label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.95em;
+    color: #333;
 }
 
 .input {
-    width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
     border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    width: calc(100% - 22px); /* Adjust for padding and border */
 }
 
 .submitButton {
@@ -46,15 +72,24 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    width: 100%;
+    font-size: 1em;
+    margin-top: 15px;
 }
 
 .closeButton {
-    background-color: #f0f0f0;
+    background-color: #dc3545;
+    color: white;
+    padding: 8px 12px;
     border: none;
-    padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 20px;
-    width: 100%;
+    font-size: 0.9em;
+    margin-top: 15px;
+    align-self: flex-end;
+}
+
+.errorMessage {
+    color: #dc3545;
+    font-size: 0.9em;
+    margin-bottom: 10px;
 }

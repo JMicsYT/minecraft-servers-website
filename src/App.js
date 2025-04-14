@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import AuthModal from './components/AuthModal';
 import News from './components/News';
 import Profile from './components/Profile';
 import AdminPanel from './components/AdminPanel';
 import Servers from './components/Servers';
 import styles from './App.module.css';
-import { Route, Routes } from 'react-router-dom';
+import { useState } from 'react';
 
 function App() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -13,7 +14,7 @@ function App() {
     return (
         <div className={styles.app}>
             <Routes>
-                <Route exact path="/" element={
+                <Route path="/" element={
                     <>
                         <button onClick={() => setIsModalOpen(true)} className={styles.openModalButton}>Открыть окно авторизации</button>
                         <AuthModal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)} />
