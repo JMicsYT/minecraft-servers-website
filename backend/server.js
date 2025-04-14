@@ -21,12 +21,9 @@ pool.connect()
     .then(() => console.log('Connected to PostgreSQL'))
     .catch(err => console.error('Error connecting to PostgreSQL:', err));
 
-// Экспортируем объект module.exports СРАЗУ ПОСЛЕ создания pool
-module.exports = { pool };
-
-// Импортируем маршруты ПОСЛЕ экспорта pool
+// Импортируем маршруты
 const authRoutes = require('./routes/auth');
-const serverRoutes = require('./routes/server');
+const serverRoutes = require('./routes/servers'); // <--- ИЗМЕНЕНО
 const newsRoutes = require('./routes/news');
 
 // Middleware
