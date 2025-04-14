@@ -1,15 +1,38 @@
 .serversContainer {
     padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 20px;
+}
+
+.loading, .error {
+    text-align: center;
+    padding: 20px;
+    color: #777;
+}
+
+.error {
+    color: #dc3545;
+    font-weight: bold;
 }
 
 .serverItem {
-    margin-bottom: 10px;
-    padding: 10px;
     background-color: white;
+    padding: 15px;
+    margin-bottom: 15px;
     border-radius: 5px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eee;
+}
+
+.serverName {
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.serverIp {
+    color: #555;
+    font-size: 0.9em;
 }

@@ -1,16 +1,23 @@
 const express = require('express');
-const router = express.Router();
-const serverController = require('../controllers/serverController');
-const authMiddleware = require('../middleware/authMiddleware');
-const adminMiddleware = require('../middleware/adminMiddleware');
-const newsRoutes = require('./routes/news');
+const app = express();
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const serverRoutes = require('./routes/servers')
+const newsRoutes = require('./routes/news'); // Импортируйте newsRoutes
 const adminRoutes = require('./routes/admin');
 
-router.get('/', authMiddleware, serverController.getServers);
-router.get('/:serverId', authMiddleware, serverController.getServerById);
-router.post('/admin/servers', authMiddleware, adminMiddleware, serverController.addServer);
-router.put('/admin/servers/:serverId', authMiddleware, adminMiddleware, serverController.editServer);
-router.delete('/admin/servers/:serverId', authMiddleware, adminMiddleware, serverController.deleteServer); // Добавляем маршрут для удаления сервера
+// Middleware
+app.use(cors());
+app.use(bodyParser.json());
+
+// Подключение маршрутов
+app.use('/api/servers', serverRoutes);
+app.use('/api/news', newsRoutes); // Подключите newsRoutes по желаемому пути, например '/api/news'
 app.use('/api/admin', adminRoutes);
 
-module.exports = router;
+// ... остальной код вашего сервера (например, порт прослушивания)
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Сервер запущен на порту ${PORT}`);
+});
