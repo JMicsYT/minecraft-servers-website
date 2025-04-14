@@ -1,155 +1,93 @@
-// src/services/adminService.js
+const API_URL = '/api/admin';
+const AUTH_URL = '/api/auth/me/profile';
 
-const API_BASE_URL = 'http://localhost:5000/api/admin'; // Базовый URL для административных эндпоинтов
-
-// Получение профиля пользователя (для проверки прав администратора)
-export const getUserProfile = async () => {
-    try {
-        const token = localStorage.getItem('token');
-        const response = await fetch(`${API_BASE_URL}/profile`, {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-            },
-        });
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message || 'Не удалось получить профиль пользователя.');
-        }
-        return await response.json();
-    } catch (error) {
-        console.error('Ошибка при получении профиля:', error);
-        throw error;
-    }
-};
-
-// Получение списка новостей
 export const getNews = async () => {
-    try {
-        const token = localStorage.getItem('token');
-        const response = await fetch(`${API_BASE_URL}/news`, {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-            },
-        });
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message || 'Не удалось загрузить новости.');
-        }
-        return await response.json();
-    } catch (error) {
-        console.error('Ошибка при получении новостей:', error);
-        throw error;
+    const response = await fetch(`${API_URL}/news`);
+    if (!response.ok) {
+        throw new Error('Ошибка при загрузке новостей');
     }
+    return response.json();
 };
 
-// Создание новой новости
 export const createNews = async (title, content) => {
-    try {
-        const token = localStorage.getItem('token');
-        const response = await fetch(`${API_BASE_URL}/news`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
-            },
-            body: JSON.stringify({ title, content }),
-        });
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message || 'Не удалось создать новость.');
-        }
-        return await response.json();
-    } catch (error) {
-        console.error('Ошибка при создании новости:', error);
-        throw error;
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${API_URL}/news`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({ title, content }),
+    });
+    if (!response.ok) {
+        throw new Error('Ошибка при создании новости');
     }
+    return response.json();
 };
 
-// Обновление существующей новости
 export const updateNews = async (id, title, content) => {
-    try {
-        const token = localStorage.getItem('token');
-        const response = await fetch(`${API_BASE_URL}/news/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
-            },
-            body: JSON.stringify({ title, content }),
-        });
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message || 'Не удалось обновить новость.');
-        }
-        return await response.json();
-    } catch (error) {
-        console.error('Ошибка при обновлении новости:', error);
-        throw error;
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${API_URL}/news/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({ title, content }),
+    });
+    if (!response.ok) {
+        throw new Error('Ошибка при обновлении новости');
     }
+    return response.json();
 };
 
-// Удаление новости
 export const deleteNews = async (id) => {
-    try {
-        const token = localStorage.getItem('token');
-        const response = await fetch(`${API_BASE_URL}/news/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-            },
-        });
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message || 'Не удалось удалить новость.');
-        }
-        return await response.json();
-    } catch (error) {
-        console.error('Ошибка при удалении новости:', error);
-        throw error;
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${API_URL}/news/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        },
+    });
+    if (!response.ok) {
+        throw new Error('Ошибка при удалении новости');
     }
+    return response.json();
 };
 
-// Получение списка серверов
 export const getServers = async () => {
-    try {
-        const token = localStorage.getItem('token');
-        const response = await fetch(`${API_BASE_URL}/servers`, {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-            },
-        });
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message || 'Не удалось загрузить список серверов.');
-        }
-        return await response.json();
-    } catch (error) {
-        console.error('Ошибка при получении серверов:', error);
-        throw error;
+    const response = await fetch(`${API_URL}/servers`);
+    if (!response.ok) {
+        throw new Error('Ошибка при загрузке серверов');
     }
+    return response.json();
 };
 
-// Создание нового сервера
 export const createServer = async (name, ip) => {
-    try {
-        const token = localStorage.getItem('token');
-        const response = await fetch(`${API_BASE_URL}/servers`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
-            },
-            body: JSON.stringify({ name, ip }),
-        });
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message || 'Не удалось добавить сервер.');
-        }
-        return await response.json();
-    } catch (error) {
-        console.error('Ошибка при добавлении сервера:', error);
-        throw error;
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${API_URL}/servers`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({ name, ip }),
+    });
+    if (!response.ok) {
+        throw new Error('Ошибка при добавлении сервера');
     }
+    return response.json();
 };
 
-// Дополнительные функции для управления серверами (обновление, удаление) могут быть добавлены позже
+export const getUserProfile = async () => {
+    const token = localStorage.getItem('token');
+    const response = await fetch(AUTH_URL, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        },
+    });
+    if (!response.ok) {
+        throw new Error('Ошибка при загрузке профиля');
+    }
+    return response.json();
+};
